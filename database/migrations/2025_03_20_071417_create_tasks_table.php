@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('status');
             $table->string('title');
             $table->integer('number');
-            $table->text('notes');
+            $table->text('notes')->nullable();
             $table->timestamps();
         });
     }
