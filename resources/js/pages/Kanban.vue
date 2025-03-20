@@ -186,6 +186,7 @@ onMounted(() => {
     }
     .kanbanArea {
         min-height: 300px;
+        height: 100%;
         cursor: pointer;
         gap: 20px;
         display: flex;
