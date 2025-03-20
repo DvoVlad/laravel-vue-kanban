@@ -7,6 +7,7 @@ Route::get('/', [TaskController::class, 'getMain'])->name('home');
 
 Route::get('/api/tasks', [TaskController::class, 'getTasks'])->name('kanban');
 Route::post('/api/tasks', [TaskController::class, 'createTask'])->name('task_create');
+Route::patch('/api/tasks', [TaskController::class, 'updateTasks'])->name('tasks_update');
 
 Route::get('dashboard', function () {
     return Inertia::render('Dashboard');

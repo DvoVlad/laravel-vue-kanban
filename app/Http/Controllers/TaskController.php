@@ -13,10 +13,10 @@ class TaskController extends Controller
     }
 
     public function getTasks() {
-        $createdTasks = Task::where("status", "created")->get();
-        $inworkTasks = Task::where("status", "inwork")->get();
-        $onreviewTasks = Task::where("status", "onreview")->get();
-        $doneTasks = Task::where("status", "done")->get();
+        $createdTasks = Task::where("status", "created")->orderBy("number", "asc")->get();
+        $inworkTasks = Task::where("status", "inwork")->orderBy("number", "asc")->get();
+        $onreviewTasks = Task::where("status", "onreview")->orderBy("number", "asc")->get();
+        $doneTasks = Task::where("status", "done")->orderBy("number", "asc")->get();
         return [
             "created" => $createdTasks,
             "inwork" => $inworkTasks,
@@ -35,5 +35,33 @@ class TaskController extends Controller
             ]
         );
         return $newTask;
+    }
+    public function updateTasks(Request $request) {
+        $taskData = $request->data;
+        foreach($taskData["created"] as $key => $updatedTask) {
+            $task = Task::find($updatedTask["id"]);
+            $task->status = "created";
+            $task->number = $key;
+            $task->save();
+        }
+        foreach($taskData["inwork"] as $key => $updatedTask) {
+            $task = Task::find($updatedTask["id"]);
+            $task->status = "inwork";
+            $task->number = $key;
+            $task->save();
+        }
+        foreach($taskData["onreview"] as $key => $updatedTask) {
+            $task = Task::find($updatedTask["id"]);
+            $task->status = "onreview";
+            $task->number = $key;
+            $task->save();
+        }
+        foreach($taskData["done"] as $key => $updatedTask) {
+            $task = Task::find($updatedTask["id"]);
+            $task->status = "done";
+            $task->number = $key;
+            $task->save();
+        }
+        return ["ok" => "updated"];
     }
 }

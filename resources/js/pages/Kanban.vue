@@ -12,7 +12,14 @@ const activate = () => {
     active.value = true;
 }
 const log = () => {
-    console.log(taskStore.tasksData);
+    //taskStore.tasksData;
+    axios({
+        method: 'patch',
+        url: '/api/tasks',
+        data: {
+            data: taskStore.tasksData
+        }
+    })
 }
 onMounted(() => {
     axios({
