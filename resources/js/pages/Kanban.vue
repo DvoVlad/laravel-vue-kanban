@@ -1,0 +1,113 @@
+<script setup lang="ts">
+import { Head } from '@inertiajs/vue3';
+import { ref, onMounted } from 'vue';
+import { useTasksStore } from '@/store/store';
+import { VueDraggableNext as draggable } from 'vue-draggable-next'
+import axios from 'axios';
+const active = ref(false);
+const taskStore = useTasksStore();
+const activate = () => {
+    active.value = true;
+}
+const log = () => {
+    console.log(taskStore.tasksData);
+}
+onMounted(() => {
+    axios({
+    method: 'get',
+    url: '/api/tasks',
+    }).then((response) => {
+        taskStore.tasksData = response.data;
+    });
+});
+</script>
+
+<template>
+    <Head title="Welcome">
+    </Head>
+    <div class="container">
+        <n-button @click="activate()">
+        Add task
+        </n-button>
+        <h1>Канбан</h1>
+        <n-drawer v-model:show="active" placement="right">
+            <n-drawer-content title="Добавить задачу">
+                Тут будет форма
+            </n-drawer-content>
+        </n-drawer>
+    </div>
+    <div class="box">
+        <draggable class="kanbanColumn" :list="taskStore.tasksData.created" group="task" @change="log">
+            <div
+                class="kanbanCard"
+                v-for="element in taskStore.tasksData.created"
+                :key="element.name"
+            >
+                {{ element.name }}
+            </div>
+        </draggable>
+        <draggable class="kanbanColumn" :list="taskStore.tasksData.inwork" group="task" @change="log">
+            <div
+                class="kanbanCard"
+                v-for="element in taskStore.tasksData.inwork"
+                :key="element.name"
+            >
+                {{ element.name }}
+            </div>
+        </draggable>
+        <draggable class="kanbanColumn" :list="taskStore.tasksData.onreview" group="task" @change="log">
+            <div
+                class="kanbanCard"
+                v-for="element in taskStore.tasksData.onreview"
+                :key="element.name"
+            >
+                {{ element.name }}
+            </div>
+        </draggable>
+        <draggable class="kanbanColumn" :list="taskStore.tasksData.done" group="task" @change="log">
+            <div
+                class="kanbanCard"
+                v-for="element in taskStore.tasksData.done"
+                :key="element.name"
+            >
+                {{ element.name }}
+            </div>
+        </draggable>
+    </div>
+</template>
+
+<style scoped>
+    .kanbanColumn {
+        border: 1px solid rgb(123, 205, 238);
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .kanbanCard {
+        border: 1px solid rgb(66, 180, 123);
+        min-height: 100px;
+        box-sizing: border-box;
+        padding: 10px;
+    }
+    .box {
+        width: 990px;
+        margin: 10px auto 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        gap: 10px;
+    }
+    .container {
+        width: 990px;
+        margin: 0 auto;
+        padding: 10px;
+        box-sizing: border-box;
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        border-bottom: 1px solid rgb(123, 205, 238);
+    }
+    h1 {
+        font-size: 30px;
+    }
+</style>
