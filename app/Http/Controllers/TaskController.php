@@ -64,4 +64,15 @@ class TaskController extends Controller
         }
         return ["ok" => "updated"];
     }
+    public function updateTask(Request $request, $id) {
+        $editedTask = Task::find($id);
+        $editedTask->title = $request->title;
+        $editedTask->status = $request->status;
+        $editedTask->notes = $request->notes;
+        $editedTask->save();
+        return $editedTask;
+    }
+    public function getTask($id) {
+        return Task::find($id);
+    }
 }

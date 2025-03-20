@@ -6,13 +6,21 @@ import { VueDraggableNext as draggable } from 'vue-draggable-next'
 import axios from 'axios';
 
 import AddTaskForm from '@/components/AddTaskForm/AddTaskForm.vue';
-const active = ref(false);
+import EditTaskForm from '@/components/EditTaskForm/EditTaskForm.vue';
+const activeDrawerAdd = ref(false);
 const taskStore = useTasksStore();
-const activate = () => {
-    active.value = true;
+const activateDrawerAdd = () => {
+    activeDrawerAdd.value = true;
 }
+
+const chosenToEditId = ref(0);
+const activeDrawerEdit = ref(false);
+const activateDrawerEdit = (id:number) => {
+    activeDrawerEdit.value = true;
+    chosenToEditId.value = id;
+}
+
 const log = () => {
-    //taskStore.tasksData;
     axios({
         method: 'patch',
         url: '/api/tasks',
@@ -36,11 +44,11 @@ onMounted(() => {
         <Head title="Welcome">
         </Head>
         <div class="container">
-            <n-button @click="activate()">
+            <n-button @click="activateDrawerAdd()">
             Add task
             </n-button>
             <h1>Канбан</h1>
-            <n-drawer v-model:show="active" placement="right">
+            <n-drawer v-model:show="activeDrawerAdd" placement="right">
                 <n-drawer-content title="Добавить задачу">
                     <add-task-form></add-task-form>
                 </n-drawer-content>
@@ -54,6 +62,15 @@ onMounted(() => {
                     :key="element.id"
                 >
                     {{ element.title }}
+                    <p>Заметки: {{ element.notes }}</p>
+                    <n-button @click="activateDrawerEdit(element.id)">
+                        Edit task
+                    </n-button>
+                    <n-drawer v-if="chosenToEditId === element.id" v-model:show="activeDrawerEdit" placement="right">
+                        <n-drawer-content title="Добавить задачу">
+                            <edit-task-form :id="element.id"></edit-task-form>
+                        </n-drawer-content>
+                    </n-drawer>
                 </div>
             </draggable>
             <draggable class="kanbanColumn" :list="taskStore.tasksData.inwork" group="task" @change="log">
@@ -63,6 +80,15 @@ onMounted(() => {
                     :key="element.id"
                 >
                     {{ element.title }}
+                    <p>Заметки: {{ element.notes }}</p>
+                    <n-button @click="activateDrawerEdit(element.id)">
+                        Edit task
+                    </n-button>
+                    <n-drawer v-if="chosenToEditId === element.id" v-model:show="activeDrawerEdit" placement="right">
+                        <n-drawer-content title="Добавить задачу">
+                            <edit-task-form :id="element.id"></edit-task-form>
+                        </n-drawer-content>
+                    </n-drawer>
                 </div>
             </draggable>
             <draggable class="kanbanColumn" :list="taskStore.tasksData.onreview" group="task" @change="log">
@@ -72,6 +98,15 @@ onMounted(() => {
                     :key="element.id"
                 >
                     {{ element.title }}
+                    <p>Заметки: {{ element.notes }}</p>
+                    <n-button @click="activateDrawerEdit(element.id)">
+                        Edit task
+                    </n-button>
+                    <n-drawer v-if="chosenToEditId === element.id" v-model:show="activeDrawerEdit" placement="right">
+                        <n-drawer-content title="Добавить задачу">
+                            <edit-task-form :id="element.id"></edit-task-form>
+                        </n-drawer-content>
+                    </n-drawer>
                 </div>
             </draggable>
             <draggable class="kanbanColumn" :list="taskStore.tasksData.done" group="task" @change="log">
@@ -81,6 +116,15 @@ onMounted(() => {
                     :key="element.id"
                 >
                     {{ element.title }}
+                    <p>Заметки: {{ element.notes }}</p>
+                    <n-button @click="activateDrawerEdit(element.id)">
+                        Edit task
+                    </n-button>
+                    <n-drawer v-if="chosenToEditId === element.id" v-model:show="activeDrawerEdit" placement="right">
+                        <n-drawer-content title="Добавить задачу">
+                            <edit-task-form :id="element.id"></edit-task-form>
+                        </n-drawer-content>
+                    </n-drawer>
                 </div>
             </draggable>
         </div>
