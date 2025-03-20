@@ -2,24 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\TaskController;
+Route::get('/', [TaskController::class, 'getMain'])->name('home');
 
-Route::get('/', function () {
-    return Inertia::render('Kanban');
-})->name('home');
-
-Route::get('/api/tasks', function () {
-    return [
-        "created" => [
-                [
-                    "name" => 'John',
-                    "id" => 1
-                ]
-            ],
-        "inwork" => [],
-        "onreview" => [],
-        "done" => []
-    ];
-})->name('kanban');
+Route::get('/api/tasks', [TaskController::class, 'getTasks'])->name('kanban');
 
 Route::get('dashboard', function () {
     return Inertia::render('Dashboard');

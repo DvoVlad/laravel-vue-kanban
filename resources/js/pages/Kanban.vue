@@ -41,36 +41,36 @@ onMounted(() => {
             <div
                 class="kanbanCard"
                 v-for="element in taskStore.tasksData.created"
-                :key="element.name"
+                :key="element.id"
             >
-                {{ element.name }}
+                {{ element.title }}
             </div>
         </draggable>
         <draggable class="kanbanColumn" :list="taskStore.tasksData.inwork" group="task" @change="log">
             <div
                 class="kanbanCard"
                 v-for="element in taskStore.tasksData.inwork"
-                :key="element.name"
+                :key="element.id"
             >
-                {{ element.name }}
+                {{ element.title }}
             </div>
         </draggable>
         <draggable class="kanbanColumn" :list="taskStore.tasksData.onreview" group="task" @change="log">
             <div
                 class="kanbanCard"
                 v-for="element in taskStore.tasksData.onreview"
-                :key="element.name"
+                :key="element.id"
             >
-                {{ element.name }}
+                {{ element.title }}
             </div>
         </draggable>
         <draggable class="kanbanColumn" :list="taskStore.tasksData.done" group="task" @change="log">
             <div
                 class="kanbanCard"
                 v-for="element in taskStore.tasksData.done"
-                :key="element.name"
+                :key="element.id"
             >
-                {{ element.name }}
+                {{ element.title }}
             </div>
         </draggable>
     </div>
