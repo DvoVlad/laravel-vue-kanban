@@ -35,7 +35,7 @@ const deleteTask = (id: number) => {
     });
 }
 
-const log = () => {
+const updateTasksKanban = () => {
     axios({
         method: 'patch',
         url: '/api/tasks',
@@ -70,90 +70,106 @@ onMounted(() => {
             </n-drawer>
         </div>
         <div class="box">
-            <draggable class="kanbanColumn" :list="taskStore.tasksData.created" group="task" @change="log">
-                <div
-                    class="kanbanCard"
-                    v-for="element in taskStore.tasksData.created"
-                    :key="element.id"
-                >
-                    {{ element.title }}
-                    <p>Заметки: {{ element.notes }}</p>
-                    <n-button @click="activateDrawerEdit(element.id)">
-                        Edit task
-                    </n-button>
-                    <n-button @click="deleteTask(element.id)">
-                        Delete task
-                    </n-button>
-                    <n-drawer v-if="chosenToEditId === element.id" v-model:show="activeDrawerEdit" placement="right">
-                        <n-drawer-content title="Добавить задачу">
-                            <edit-task-form :id="element.id"></edit-task-form>
-                        </n-drawer-content>
-                    </n-drawer>
-                </div>
-            </draggable>
-            <draggable class="kanbanColumn" :list="taskStore.tasksData.inwork" group="task" @change="log">
-                <div
-                    class="kanbanCard"
-                    v-for="element in taskStore.tasksData.inwork"
-                    :key="element.id"
-                >
-                    {{ element.title }}
-                    <p>Заметки: {{ element.notes }}</p>
-                    <n-button @click="activateDrawerEdit(element.id)">
-                        Edit task
-                    </n-button>
-                    <n-button @click="deleteTask(element.id)">
-                        Delete task
-                    </n-button>
-                    <n-drawer v-if="chosenToEditId === element.id" v-model:show="activeDrawerEdit" placement="right">
-                        <n-drawer-content title="Добавить задачу">
-                            <edit-task-form :id="element.id"></edit-task-form>
-                        </n-drawer-content>
-                    </n-drawer>
-                </div>
-            </draggable>
-            <draggable class="kanbanColumn" :list="taskStore.tasksData.onreview" group="task" @change="log">
-                <div
-                    class="kanbanCard"
-                    v-for="element in taskStore.tasksData.onreview"
-                    :key="element.id"
-                >
-                    {{ element.title }}
-                    <p>Заметки: {{ element.notes }}</p>
-                    <n-button @click="activateDrawerEdit(element.id)">
-                        Edit task
-                    </n-button>
-                    <n-button @click="deleteTask(element.id)">
-                        Delete task
-                    </n-button>
-                    <n-drawer v-if="chosenToEditId === element.id" v-model:show="activeDrawerEdit" placement="right">
-                        <n-drawer-content title="Добавить задачу">
-                            <edit-task-form :id="element.id"></edit-task-form>
-                        </n-drawer-content>
-                    </n-drawer>
-                </div>
-            </draggable>
-            <draggable class="kanbanColumn" :list="taskStore.tasksData.done" group="task" @change="log">
-                <div
-                    class="kanbanCard"
-                    v-for="element in taskStore.tasksData.done"
-                    :key="element.id"
-                >
-                    {{ element.title }}
-                    <p>Заметки: {{ element.notes }}</p>
-                    <n-button @click="activateDrawerEdit(element.id)">
-                        Edit task
-                    </n-button>
-                    <n-button @click="deleteTask(element.id)">
-                        Delete task
-                    </n-button>
-                    <n-drawer v-if="chosenToEditId === element.id" v-model:show="activeDrawerEdit" placement="right">
-                        <n-drawer-content title="Добавить задачу">
-                            <edit-task-form :id="element.id"></edit-task-form>
-                        </n-drawer-content>
-                    </n-drawer>
-                </div>
-            </draggable>
+            <div class="kanbanColumn">
+                <h2>Создано</h2>
+                <draggable class="kanbanArea" :list="taskStore.tasksData.created" group="task" @change="updateTasksKanban">
+                    <div
+                        class="kanbanCard"
+                        v-for="element in taskStore.tasksData.created"
+                        :key="element.id"
+                    >
+                        {{ element.title }}
+                        <p v-if="element.notes">Заметки: {{ element.notes }}</p>
+                        <n-divider />
+                        <n-button @click="activateDrawerEdit(element.id)">
+                            Edit task
+                        </n-button>
+                        <n-button @click="deleteTask(element.id)">
+                            Delete task
+                        </n-button>
+                        <n-drawer v-if="chosenToEditId === element.id" v-model:show="activeDrawerEdit" placement="right">
+                            <n-drawer-content title="Добавить задачу">
+                                <edit-task-form :id="element.id"></edit-task-form>
+                            </n-drawer-content>
+                        </n-drawer>
+                    </div>
+                </draggable>
+            </div>
+            <div class="kanbanColumn">
+                <h2>В работе</h2>
+                <draggable class="kanbanArea" :list="taskStore.tasksData.inwork" group="task" @change="updateTasksKanban">
+                    <div
+                        class="kanbanCard"
+                        v-for="element in taskStore.tasksData.inwork"
+                        :key="element.id"
+                    >
+                        {{ element.title }}
+                        <p v-if="element.notes">Заметки: {{ element.notes }}</p>
+                        <n-divider />
+                        <n-button @click="activateDrawerEdit(element.id)">
+                            Edit task
+                        </n-button>
+                        <n-button @click="deleteTask(element.id)">
+                            Delete task
+                        </n-button>
+                        <n-drawer v-if="chosenToEditId === element.id" v-model:show="activeDrawerEdit" placement="right">
+                            <n-drawer-content title="Добавить задачу">
+                                <edit-task-form :id="element.id"></edit-task-form>
+                            </n-drawer-content>
+                        </n-drawer>
+                    </div>
+                </draggable>
+            </div>
+            <div class="kanbanColumn">
+                <h2>На ревью</h2>
+                <draggable class="kanbanArea" :list="taskStore.tasksData.onreview" group="task" @change="updateTasksKanban">
+                    <div
+                        class="kanbanCard"
+                        v-for="element in taskStore.tasksData.onreview"
+                        :key="element.id"
+                    >
+                        {{ element.title }}
+                        <p v-if="element.notes">Заметки: {{ element.notes }}</p>
+                        <n-divider />
+                        <n-button @click="activateDrawerEdit(element.id)">
+                            Edit task
+                        </n-button>
+                        <n-button @click="deleteTask(element.id)">
+                            Delete task
+                        </n-button>
+                        <n-drawer v-if="chosenToEditId === element.id" v-model:show="activeDrawerEdit" placement="right">
+                            <n-drawer-content title="Добавить задачу">
+                                <edit-task-form :id="element.id"></edit-task-form>
+                            </n-drawer-content>
+                        </n-drawer>
+                    </div>
+                </draggable>
+            </div>
+            <div class="kanbanColumn">
+                <h2>Сделано</h2>
+                <draggable class="kanbanArea" :list="taskStore.tasksData.done" group="task" @change="updateTasksKanban">
+                    <div
+                        class="kanbanCard"
+                        v-for="element in taskStore.tasksData.done"
+                        :key="element.id"
+                    >
+                        {{ element.title }}
+                        <p v-if="element.notes">Заметки: {{ element.notes }}</p>
+                        <n-divider />
+                        <n-button @click="activateDrawerEdit(element.id)">
+                            Edit task
+                        </n-button>
+                        <n-button @click="deleteTask(element.id)">
+                            Delete task
+                        </n-button>
+                        <n-drawer v-if="chosenToEditId === element.id" v-model:show="activeDrawerEdit" placement="right">
+                            <n-drawer-content title="Добавить задачу">
+                                <edit-task-form :id="element.id"></edit-task-form>
+                            </n-drawer-content>
+                        </n-drawer>
+                    </div>
+                </draggable>
+            </div>
         </div>
     </n-message-provider>
 </template>
@@ -161,13 +177,23 @@ onMounted(() => {
 <style scoped>
     .kanbanColumn {
         border: 1px solid rgb(123, 205, 238);
+        border-radius: 10px;
         padding: 10px;
+        min-height: 300px;
+        gap: 10px;
         display: flex;
         flex-direction: column;
+    }
+    .kanbanArea {
+        min-height: 300px;
+        cursor: pointer;
         gap: 20px;
+        display: flex;
+        flex-direction: column;
     }
     .kanbanCard {
         border: 1px solid rgb(66, 180, 123);
+        border-radius: 10px;
         min-height: 100px;
         box-sizing: border-box;
         padding: 10px;
