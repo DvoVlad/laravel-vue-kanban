@@ -75,4 +75,9 @@ class TaskController extends Controller
     public function getTask($id) {
         return Task::find($id);
     }
+    public function deleteTask($id) {
+        $deletedTask = Task::find($id);
+        $deletedTask->delete();
+        return ["ok" => "deleted ". $id];
+    }
 }

@@ -20,6 +20,21 @@ const activateDrawerEdit = (id:number) => {
     chosenToEditId.value = id;
 }
 
+const deleteTask = (id: number) => {
+    axios({
+    method: 'delete',
+    url: `/api/tasks/${id}`,
+    })
+    .then(() => {
+        return axios({
+            method: 'get',
+            url: '/api/tasks',
+        }).then((response) => {
+            taskStore.tasksData = response.data;
+        });
+    });
+}
+
 const log = () => {
     axios({
         method: 'patch',
@@ -66,6 +81,9 @@ onMounted(() => {
                     <n-button @click="activateDrawerEdit(element.id)">
                         Edit task
                     </n-button>
+                    <n-button @click="deleteTask(element.id)">
+                        Delete task
+                    </n-button>
                     <n-drawer v-if="chosenToEditId === element.id" v-model:show="activeDrawerEdit" placement="right">
                         <n-drawer-content title="Добавить задачу">
                             <edit-task-form :id="element.id"></edit-task-form>
@@ -83,6 +101,9 @@ onMounted(() => {
                     <p>Заметки: {{ element.notes }}</p>
                     <n-button @click="activateDrawerEdit(element.id)">
                         Edit task
+                    </n-button>
+                    <n-button @click="deleteTask(element.id)">
+                        Delete task
                     </n-button>
                     <n-drawer v-if="chosenToEditId === element.id" v-model:show="activeDrawerEdit" placement="right">
                         <n-drawer-content title="Добавить задачу">
@@ -102,6 +123,9 @@ onMounted(() => {
                     <n-button @click="activateDrawerEdit(element.id)">
                         Edit task
                     </n-button>
+                    <n-button @click="deleteTask(element.id)">
+                        Delete task
+                    </n-button>
                     <n-drawer v-if="chosenToEditId === element.id" v-model:show="activeDrawerEdit" placement="right">
                         <n-drawer-content title="Добавить задачу">
                             <edit-task-form :id="element.id"></edit-task-form>
@@ -119,6 +143,9 @@ onMounted(() => {
                     <p>Заметки: {{ element.notes }}</p>
                     <n-button @click="activateDrawerEdit(element.id)">
                         Edit task
+                    </n-button>
+                    <n-button @click="deleteTask(element.id)">
+                        Delete task
                     </n-button>
                     <n-drawer v-if="chosenToEditId === element.id" v-model:show="activeDrawerEdit" placement="right">
                         <n-drawer-content title="Добавить задачу">
