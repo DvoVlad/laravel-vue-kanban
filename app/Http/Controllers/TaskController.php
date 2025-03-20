@@ -13,20 +13,27 @@ class TaskController extends Controller
     }
 
     public function getTasks() {
+        $createdTasks = Task::where("status", "created")->get();
+        $inworkTasks = Task::where("status", "inwork")->get();
+        $onreviewTasks = Task::where("status", "onreview")->get();
+        $doneTasks = Task::where("status", "done")->get();
         return [
-            "created" => [
-                    [
-                        "title" => 'John',
-                        "id" => 1
-                    ]
-                ],
-            "inwork" => [],
-            "onreview" => [],
-            "done" => []
+            "created" => $createdTasks,
+            "inwork" => $inworkTasks,
+            "onreview" => $onreviewTasks,
+            "done" => $doneTasks
         ];
     }
 
     public function createTask(Request $request) {
-        return $request->title;
+        $newTask = Task::create(
+            [
+                "title" => $request->title,
+                "status" => $request->status,
+                "number" => 0,
+                "notes" => $request->notes
+            ]
+        );
+        return $newTask;
     }
 }

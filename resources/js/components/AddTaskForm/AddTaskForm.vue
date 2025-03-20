@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
+import axios from 'axios';
 import type { FormInst } from 'naive-ui'
 import { useMessage } from 'naive-ui'
-import Label from '../ui/label/Label.vue';
+import { useTasksStore } from '@/store/store';
+const taskStore = useTasksStore();
 const message = useMessage();
 const formRef = ref<FormInst | null>(null);
 const formValue = ref({
@@ -28,8 +30,26 @@ const rules = ref(
         formRef.value?.validate((errors) => {
           if (!errors) {
             const sendData = {...formValue.value};
-            console.log(sendData);
-            message.success('Задача создана')
+            axios({
+                method: 'post',
+                url: '/api/tasks',
+                data: sendData
+            }).then(() => {
+                message.success('Задача создана');
+            }).then(() => {
+                return axios({
+                method: 'get',
+                url: '/api/tasks',
+                }).then((response) => {
+                    taskStore.tasksData = response.data;
+                    formValue.value = {
+                        title: '',
+                        status: '',
+                        notes: ''
+                    };
+                });
+            });
+
           }
           else {
             message.error('Не валидные поля')
@@ -43,7 +63,7 @@ const rules = ref(
         },
         {
           label: 'Создана',
-          value: 'creared',
+          value: 'created',
         },
         {
           label: 'В работе',
