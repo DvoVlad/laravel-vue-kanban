@@ -78,7 +78,7 @@ onMounted(() => {
                         v-for="element in taskStore.tasksData.created"
                         :key="element.id"
                     >
-                        {{ element.title }}
+                        {{ element.title }} #{{ element.id }}
                         <p v-if="element.notes">Заметки: {{ element.notes }}</p>
                         <n-divider />
                         <n-button @click="activateDrawerEdit(element.id)">
@@ -103,7 +103,7 @@ onMounted(() => {
                         v-for="element in taskStore.tasksData.inwork"
                         :key="element.id"
                     >
-                        {{ element.title }}
+                        {{ element.title }} #{{ element.id }}
                         <p v-if="element.notes">Заметки: {{ element.notes }}</p>
                         <n-divider />
                         <n-button @click="activateDrawerEdit(element.id)">
@@ -128,7 +128,7 @@ onMounted(() => {
                         v-for="element in taskStore.tasksData.onreview"
                         :key="element.id"
                     >
-                        {{ element.title }}
+                        {{ element.title }} #{{ element.id }}
                         <p v-if="element.notes">Заметки: {{ element.notes }}</p>
                         <n-divider />
                         <n-button @click="activateDrawerEdit(element.id)">
@@ -153,7 +153,7 @@ onMounted(() => {
                         v-for="element in taskStore.tasksData.done"
                         :key="element.id"
                     >
-                        {{ element.title }}
+                        {{ element.title }} #{{ element.id }}
                         <p v-if="element.notes">Заметки: {{ element.notes }}</p>
                         <n-divider />
                         <n-button @click="activateDrawerEdit(element.id)">
