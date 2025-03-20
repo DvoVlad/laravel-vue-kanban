@@ -6,6 +6,7 @@ use App\Http\Controllers\TaskController;
 Route::get('/', [TaskController::class, 'getMain'])->name('home');
 
 Route::get('/api/tasks', [TaskController::class, 'getTasks'])->name('kanban');
+Route::post('/api/tasks', [TaskController::class, 'createTask'])->name('task_create');
 
 Route::get('dashboard', function () {
     return Inertia::render('Dashboard');

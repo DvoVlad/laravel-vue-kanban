@@ -4,6 +4,8 @@ import { ref, onMounted } from 'vue';
 import { useTasksStore } from '@/store/store';
 import { VueDraggableNext as draggable } from 'vue-draggable-next'
 import axios from 'axios';
+
+import AddTaskForm from '@/components/AddTaskForm/AddTaskForm.vue';
 const active = ref(false);
 const taskStore = useTasksStore();
 const activate = () => {
@@ -23,57 +25,59 @@ onMounted(() => {
 </script>
 
 <template>
-    <Head title="Welcome">
-    </Head>
-    <div class="container">
-        <n-button @click="activate()">
-        Add task
-        </n-button>
-        <h1>Канбан</h1>
-        <n-drawer v-model:show="active" placement="right">
-            <n-drawer-content title="Добавить задачу">
-                Тут будет форма
-            </n-drawer-content>
-        </n-drawer>
-    </div>
-    <div class="box">
-        <draggable class="kanbanColumn" :list="taskStore.tasksData.created" group="task" @change="log">
-            <div
-                class="kanbanCard"
-                v-for="element in taskStore.tasksData.created"
-                :key="element.id"
-            >
-                {{ element.title }}
-            </div>
-        </draggable>
-        <draggable class="kanbanColumn" :list="taskStore.tasksData.inwork" group="task" @change="log">
-            <div
-                class="kanbanCard"
-                v-for="element in taskStore.tasksData.inwork"
-                :key="element.id"
-            >
-                {{ element.title }}
-            </div>
-        </draggable>
-        <draggable class="kanbanColumn" :list="taskStore.tasksData.onreview" group="task" @change="log">
-            <div
-                class="kanbanCard"
-                v-for="element in taskStore.tasksData.onreview"
-                :key="element.id"
-            >
-                {{ element.title }}
-            </div>
-        </draggable>
-        <draggable class="kanbanColumn" :list="taskStore.tasksData.done" group="task" @change="log">
-            <div
-                class="kanbanCard"
-                v-for="element in taskStore.tasksData.done"
-                :key="element.id"
-            >
-                {{ element.title }}
-            </div>
-        </draggable>
-    </div>
+    <n-message-provider>
+        <Head title="Welcome">
+        </Head>
+        <div class="container">
+            <n-button @click="activate()">
+            Add task
+            </n-button>
+            <h1>Канбан</h1>
+            <n-drawer v-model:show="active" placement="right">
+                <n-drawer-content title="Добавить задачу">
+                    <add-task-form></add-task-form>
+                </n-drawer-content>
+            </n-drawer>
+        </div>
+        <div class="box">
+            <draggable class="kanbanColumn" :list="taskStore.tasksData.created" group="task" @change="log">
+                <div
+                    class="kanbanCard"
+                    v-for="element in taskStore.tasksData.created"
+                    :key="element.id"
+                >
+                    {{ element.title }}
+                </div>
+            </draggable>
+            <draggable class="kanbanColumn" :list="taskStore.tasksData.inwork" group="task" @change="log">
+                <div
+                    class="kanbanCard"
+                    v-for="element in taskStore.tasksData.inwork"
+                    :key="element.id"
+                >
+                    {{ element.title }}
+                </div>
+            </draggable>
+            <draggable class="kanbanColumn" :list="taskStore.tasksData.onreview" group="task" @change="log">
+                <div
+                    class="kanbanCard"
+                    v-for="element in taskStore.tasksData.onreview"
+                    :key="element.id"
+                >
+                    {{ element.title }}
+                </div>
+            </draggable>
+            <draggable class="kanbanColumn" :list="taskStore.tasksData.done" group="task" @change="log">
+                <div
+                    class="kanbanCard"
+                    v-for="element in taskStore.tasksData.done"
+                    :key="element.id"
+                >
+                    {{ element.title }}
+                </div>
+            </draggable>
+        </div>
+    </n-message-provider>
 </template>
 
 <style scoped>
