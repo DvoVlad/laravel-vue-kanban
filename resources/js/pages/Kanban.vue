@@ -65,7 +65,7 @@ onMounted(() => {
 
 <template>
     <n-message-provider>
-        <Head title="Welcome">
+        <Head title="Welcome to Kanban!">
         </Head>
         <div class="container">
             <n-button @click="activateDrawerAdd()">
