@@ -220,6 +220,9 @@ onMounted(() => {
         box-sizing: border-box;
         padding: 10px;
     }
+    .kanbanCard:hover {
+        box-shadow: 6px 5px 5px 0px rgba(34, 60, 80, 0.29);
+    }
     .box {
         width: 990px;
         margin: 10px auto 0;
