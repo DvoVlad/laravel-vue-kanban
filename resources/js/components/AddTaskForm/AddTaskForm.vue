@@ -26,8 +26,7 @@ const rules = ref(
             trigger: ['input', 'blur']
         }
     })
-    const handleValidateClick = (e: MouseEvent) => {
-        e.preventDefault()
+    const handleSubmit = () => {
         formRef.value?.validate((errors) => {
           if (!errors) {
             const sendData = {...formValue.value};
@@ -90,6 +89,7 @@ const rules = ref(
             :model="formValue"
             :rules="rules"
             size="medium"
+            @submit.prevent="handleSubmit"
             >
             <n-form-item label="Название задачи" path="title">
                 <n-input v-model:value="formValue.title" placeholder="Input Name" />
@@ -104,7 +104,7 @@ const rules = ref(
                 />
             </n-form-item>
             <n-form-item>
-                <n-button @click="handleValidateClick">
+                <n-button attr-type="submit">
                     Создать задачу
                 </n-button>
             </n-form-item>
