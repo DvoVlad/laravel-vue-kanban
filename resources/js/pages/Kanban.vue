@@ -88,7 +88,7 @@ onMounted(() => {
                             Delete task
                         </n-button>
                         <n-drawer v-if="chosenToEditId === element.id" v-model:show="activeDrawerEdit" placement="right">
-                            <n-drawer-content title="Добавить задачу">
+                            <n-drawer-content title="Редактировать задачу">
                                 <edit-task-form :id="element.id"></edit-task-form>
                             </n-drawer-content>
                         </n-drawer>
@@ -113,7 +113,7 @@ onMounted(() => {
                             Delete task
                         </n-button>
                         <n-drawer v-if="chosenToEditId === element.id" v-model:show="activeDrawerEdit" placement="right">
-                            <n-drawer-content title="Добавить задачу">
+                            <n-drawer-content title="Редактировать задачу">
                                 <edit-task-form :id="element.id"></edit-task-form>
                             </n-drawer-content>
                         </n-drawer>
@@ -138,7 +138,7 @@ onMounted(() => {
                             Delete task
                         </n-button>
                         <n-drawer v-if="chosenToEditId === element.id" v-model:show="activeDrawerEdit" placement="right">
-                            <n-drawer-content title="Добавить задачу">
+                            <n-drawer-content title="Редактировать задачу">
                                 <edit-task-form :id="element.id"></edit-task-form>
                             </n-drawer-content>
                         </n-drawer>
@@ -163,7 +163,7 @@ onMounted(() => {
                             Delete task
                         </n-button>
                         <n-drawer v-if="chosenToEditId === element.id" v-model:show="activeDrawerEdit" placement="right">
-                            <n-drawer-content title="Добавить задачу">
+                            <n-drawer-content title="Редактировать задачу">
                                 <edit-task-form :id="element.id"></edit-task-form>
                             </n-drawer-content>
                         </n-drawer>
