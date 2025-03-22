@@ -68,7 +68,7 @@ onMounted(() => {
         <Head title="Welcome to Kanban!">
         </Head>
         <div class="container">
-            <n-button type="primary" @click="activateDrawerAdd()">
+            <n-button class="effectButton" type="primary" @click="activateDrawerAdd()">
             Add task
             </n-button>
             <h1>Канбан</h1>
@@ -91,10 +91,10 @@ onMounted(() => {
                         <p v-if="element.notes">Заметки: {{ element.notes }}</p>
                         <n-divider />
                         <div class="buttonsGroup">
-                            <n-button type="primary" ghost @click="activateDrawerEdit(element.id)">
+                            <n-button class="effectButton" type="primary" ghost @click="activateDrawerEdit(element.id)">
                                 Edit task
                             </n-button>
-                            <n-button ghost color="#ff0000" @click="deleteTask(element.id)">
+                            <n-button class="effectButton" ghost color="#ff0000" @click="deleteTask(element.id)">
                                 Delete task
                             </n-button>
                         </div>
@@ -118,10 +118,10 @@ onMounted(() => {
                         <p v-if="element.notes">Заметки: {{ element.notes }}</p>
                         <n-divider />
                         <div class="buttonsGroup">
-                            <n-button type="primary" ghost @click="activateDrawerEdit(element.id)">
+                            <n-button class="effectButton" type="primary" ghost @click="activateDrawerEdit(element.id)">
                                 Edit task
                             </n-button>
-                            <n-button ghost color="#ff0000" @click="deleteTask(element.id)">
+                            <n-button class="effectButton" ghost color="#ff0000" @click="deleteTask(element.id)">
                                 Delete task
                             </n-button>
                         </div>
@@ -145,10 +145,10 @@ onMounted(() => {
                         <p v-if="element.notes">Заметки: {{ element.notes }}</p>
                         <n-divider />
                         <div class="buttonsGroup">
-                            <n-button type="primary" ghost @click="activateDrawerEdit(element.id)">
+                            <n-button class="effectButton" type="primary" ghost @click="activateDrawerEdit(element.id)">
                                 Edit task
                             </n-button>
-                            <n-button ghost color="#ff0000" @click="deleteTask(element.id)">
+                            <n-button class="effectButton" ghost color="#ff0000" @click="deleteTask(element.id)">
                                 Delete task
                             </n-button>
                         </div>
@@ -172,10 +172,10 @@ onMounted(() => {
                         <p v-if="element.notes">Заметки: {{ element.notes }}</p>
                         <n-divider />
                         <div class="buttonsGroup">
-                            <n-button type="primary" ghost @click="activateDrawerEdit(element.id)">
+                            <n-button class="effectButton" type="primary" ghost @click="activateDrawerEdit(element.id)">
                                 Edit task
                             </n-button>
-                            <n-button ghost color="#ff0000" @click="deleteTask(element.id)">
+                            <n-button class="effectButton" ghost color="#ff0000" @click="deleteTask(element.id)">
                                 Delete task
                             </n-button>
                         </div>
@@ -242,5 +242,11 @@ onMounted(() => {
     }
     h1 {
         font-size: 30px;
+    }
+    .effectButton {
+        transition: transform 0.5s;
+    }
+    .effectButton:hover {
+        transform: scale(1.1);
     }
 </style>
