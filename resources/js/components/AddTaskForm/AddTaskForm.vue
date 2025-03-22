@@ -104,7 +104,7 @@ const rules = ref(
                 />
             </n-form-item>
             <n-form-item>
-                <n-button attr-type="submit">
+                <n-button type="primary" attr-type="submit">
                     Создать задачу
                 </n-button>
             </n-form-item>
