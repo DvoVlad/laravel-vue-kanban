@@ -90,12 +90,14 @@ onMounted(() => {
                         {{ element.title }} #{{ element.id }}
                         <p v-if="element.notes">Заметки: {{ element.notes }}</p>
                         <n-divider />
-                        <n-button @click="activateDrawerEdit(element.id)">
-                            Edit task
-                        </n-button>
-                        <n-button @click="deleteTask(element.id)">
-                            Delete task
-                        </n-button>
+                        <div class="buttonsGroup">
+                            <n-button @click="activateDrawerEdit(element.id)">
+                                Edit task
+                            </n-button>
+                            <n-button @click="deleteTask(element.id)">
+                                Delete task
+                            </n-button>
+                        </div>
                         <n-drawer v-if="chosenToEditId === element.id" v-model:show="activeDrawerEdit" placement="right">
                             <n-drawer-content title="Редактировать задачу">
                                 <edit-task-form @sended="closeFormEdit" :id="element.id"></edit-task-form>
@@ -115,12 +117,14 @@ onMounted(() => {
                         {{ element.title }} #{{ element.id }}
                         <p v-if="element.notes">Заметки: {{ element.notes }}</p>
                         <n-divider />
-                        <n-button @click="activateDrawerEdit(element.id)">
-                            Edit task
-                        </n-button>
-                        <n-button @click="deleteTask(element.id)">
-                            Delete task
-                        </n-button>
+                        <div class="buttonsGroup">
+                            <n-button @click="activateDrawerEdit(element.id)">
+                                Edit task
+                            </n-button>
+                            <n-button @click="deleteTask(element.id)">
+                                Delete task
+                            </n-button>
+                        </div>
                         <n-drawer v-if="chosenToEditId === element.id" v-model:show="activeDrawerEdit" placement="right">
                             <n-drawer-content title="Редактировать задачу">
                                 <edit-task-form @sended="closeFormEdit" :id="element.id"></edit-task-form>
@@ -140,12 +144,14 @@ onMounted(() => {
                         {{ element.title }} #{{ element.id }}
                         <p v-if="element.notes">Заметки: {{ element.notes }}</p>
                         <n-divider />
-                        <n-button @click="activateDrawerEdit(element.id)">
-                            Edit task
-                        </n-button>
-                        <n-button @click="deleteTask(element.id)">
-                            Delete task
-                        </n-button>
+                        <div class="buttonsGroup">
+                            <n-button @click="activateDrawerEdit(element.id)">
+                                Edit task
+                            </n-button>
+                            <n-button @click="deleteTask(element.id)">
+                                Delete task
+                            </n-button>
+                        </div>
                         <n-drawer v-if="chosenToEditId === element.id" v-model:show="activeDrawerEdit" placement="right">
                             <n-drawer-content title="Редактировать задачу">
                                 <edit-task-form @sended="closeFormEdit" :id="element.id"></edit-task-form>
@@ -165,12 +171,14 @@ onMounted(() => {
                         {{ element.title }} #{{ element.id }}
                         <p v-if="element.notes">Заметки: {{ element.notes }}</p>
                         <n-divider />
-                        <n-button @click="activateDrawerEdit(element.id)">
-                            Edit task
-                        </n-button>
-                        <n-button @click="deleteTask(element.id)">
-                            Delete task
-                        </n-button>
+                        <div class="buttonsGroup">
+                            <n-button @click="activateDrawerEdit(element.id)">
+                                Edit task
+                            </n-button>
+                            <n-button @click="deleteTask(element.id)">
+                                Delete task
+                            </n-button>
+                        </div>
                         <n-drawer v-if="chosenToEditId === element.id" v-model:show="activeDrawerEdit" placement="right">
                             <n-drawer-content title="Редактировать задачу">
                                 <edit-task-form @sended="closeFormEdit" :id="element.id"></edit-task-form>
@@ -184,6 +192,10 @@ onMounted(() => {
 </template>
 
 <style scoped>
+    .buttonsGroup {
+        display: flex;
+        justify-content: space-between;
+    }
     .kanbanColumn {
         border: 1px solid rgb(123, 205, 238);
         border-radius: 10px;
