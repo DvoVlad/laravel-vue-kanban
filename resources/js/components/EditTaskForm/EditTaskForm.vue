@@ -7,6 +7,7 @@ import { useTasksStore } from '@/store/store';
 const props = defineProps({
   id: Number
 })
+const emit = defineEmits(["sended"]);
 const taskStore = useTasksStore();
 const message = useMessage();
 const formRef = ref<FormInst | null>(null);
@@ -53,6 +54,7 @@ const rules = ref(
                 url: '/api/tasks',
                 }).then((response) => {
                     taskStore.tasksData = response.data;
+                    emit('sended');
                 });
             });
 

@@ -4,6 +4,7 @@ import axios from 'axios';
 import type { FormInst } from 'naive-ui'
 import { useMessage } from 'naive-ui'
 import { useTasksStore } from '@/store/store';
+const emit = defineEmits(["sended"]);
 const taskStore = useTasksStore();
 const message = useMessage();
 const formRef = ref<FormInst | null>(null);
@@ -47,6 +48,7 @@ const rules = ref(
                         status: '',
                         notes: ''
                     };
+                    emit('sended');
                 });
             });
 

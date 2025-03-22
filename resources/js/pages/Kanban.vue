@@ -44,6 +44,15 @@ const updateTasksKanban = () => {
         }
     })
 }
+
+const closeFormAdd = () => {
+    activeDrawerAdd.value = false;
+}
+
+const closeFormEdit = () => {
+    activeDrawerEdit.value = false;
+}
+
 onMounted(() => {
     axios({
     method: 'get',
@@ -65,7 +74,7 @@ onMounted(() => {
             <h1>Канбан</h1>
             <n-drawer v-model:show="activeDrawerAdd" placement="right">
                 <n-drawer-content title="Добавить задачу">
-                    <add-task-form></add-task-form>
+                    <add-task-form @sended="closeFormAdd"></add-task-form>
                 </n-drawer-content>
             </n-drawer>
         </div>
@@ -89,7 +98,7 @@ onMounted(() => {
                         </n-button>
                         <n-drawer v-if="chosenToEditId === element.id" v-model:show="activeDrawerEdit" placement="right">
                             <n-drawer-content title="Редактировать задачу">
-                                <edit-task-form :id="element.id"></edit-task-form>
+                                <edit-task-form @sended="closeFormEdit" :id="element.id"></edit-task-form>
                             </n-drawer-content>
                         </n-drawer>
                     </div>
@@ -114,7 +123,7 @@ onMounted(() => {
                         </n-button>
                         <n-drawer v-if="chosenToEditId === element.id" v-model:show="activeDrawerEdit" placement="right">
                             <n-drawer-content title="Редактировать задачу">
-                                <edit-task-form :id="element.id"></edit-task-form>
+                                <edit-task-form @sended="closeFormEdit" :id="element.id"></edit-task-form>
                             </n-drawer-content>
                         </n-drawer>
                     </div>
@@ -139,7 +148,7 @@ onMounted(() => {
                         </n-button>
                         <n-drawer v-if="chosenToEditId === element.id" v-model:show="activeDrawerEdit" placement="right">
                             <n-drawer-content title="Редактировать задачу">
-                                <edit-task-form :id="element.id"></edit-task-form>
+                                <edit-task-form @sended="closeFormEdit" :id="element.id"></edit-task-form>
                             </n-drawer-content>
                         </n-drawer>
                     </div>
@@ -164,7 +173,7 @@ onMounted(() => {
                         </n-button>
                         <n-drawer v-if="chosenToEditId === element.id" v-model:show="activeDrawerEdit" placement="right">
                             <n-drawer-content title="Редактировать задачу">
-                                <edit-task-form :id="element.id"></edit-task-form>
+                                <edit-task-form @sended="closeFormEdit" :id="element.id"></edit-task-form>
                             </n-drawer-content>
                         </n-drawer>
                     </div>
