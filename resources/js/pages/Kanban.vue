@@ -68,7 +68,7 @@ onMounted(() => {
         <Head title="Welcome to Kanban!">
         </Head>
         <div class="container">
-            <n-button @click="activateDrawerAdd()">
+            <n-button type="primary" @click="activateDrawerAdd()">
             Add task
             </n-button>
             <h1>Канбан</h1>
@@ -91,10 +91,10 @@ onMounted(() => {
                         <p v-if="element.notes">Заметки: {{ element.notes }}</p>
                         <n-divider />
                         <div class="buttonsGroup">
-                            <n-button @click="activateDrawerEdit(element.id)">
+                            <n-button type="primary" ghost @click="activateDrawerEdit(element.id)">
                                 Edit task
                             </n-button>
-                            <n-button @click="deleteTask(element.id)">
+                            <n-button ghost color="#ff0000" @click="deleteTask(element.id)">
                                 Delete task
                             </n-button>
                         </div>
@@ -118,10 +118,10 @@ onMounted(() => {
                         <p v-if="element.notes">Заметки: {{ element.notes }}</p>
                         <n-divider />
                         <div class="buttonsGroup">
-                            <n-button @click="activateDrawerEdit(element.id)">
+                            <n-button type="primary" ghost @click="activateDrawerEdit(element.id)">
                                 Edit task
                             </n-button>
-                            <n-button @click="deleteTask(element.id)">
+                            <n-button ghost color="#ff0000" @click="deleteTask(element.id)">
                                 Delete task
                             </n-button>
                         </div>
@@ -145,10 +145,10 @@ onMounted(() => {
                         <p v-if="element.notes">Заметки: {{ element.notes }}</p>
                         <n-divider />
                         <div class="buttonsGroup">
-                            <n-button @click="activateDrawerEdit(element.id)">
+                            <n-button type="primary" ghost @click="activateDrawerEdit(element.id)">
                                 Edit task
                             </n-button>
-                            <n-button @click="deleteTask(element.id)">
+                            <n-button ghost color="#ff0000" @click="deleteTask(element.id)">
                                 Delete task
                             </n-button>
                         </div>
@@ -172,10 +172,10 @@ onMounted(() => {
                         <p v-if="element.notes">Заметки: {{ element.notes }}</p>
                         <n-divider />
                         <div class="buttonsGroup">
-                            <n-button @click="activateDrawerEdit(element.id)">
+                            <n-button type="primary" ghost @click="activateDrawerEdit(element.id)">
                                 Edit task
                             </n-button>
-                            <n-button @click="deleteTask(element.id)">
+                            <n-button ghost color="#ff0000" @click="deleteTask(element.id)">
                                 Delete task
                             </n-button>
                         </div>
